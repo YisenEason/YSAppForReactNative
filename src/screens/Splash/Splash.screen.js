@@ -3,7 +3,6 @@ import { View, Text } from "react-native";
 
 const Splash = () => {
 
-  // const nav = use
   useEffect(()=>{
     console.log('初始化完成');
     setTimeout(() => {

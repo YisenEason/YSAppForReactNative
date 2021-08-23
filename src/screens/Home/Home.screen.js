@@ -1,39 +1,33 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useReducer } from 'react';
+import React, { useEffect, useLayoutEffect, useReducer } from 'react';
 import { Button, SafeAreaView, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { useStore } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { loginAction } from '../../stores/actions/user.action';
+import CustomHeader from '../../components/Header';
+import { push } from '../../navigation/RootNavigation';
 import styles from './Home.style';
+import { showConfirmModal, showLoading } from '../../utils/ModalUtil';
+import LangUtil from '../../utils/LangUtil';
 
 const Home = () => {
 
-	console.log('render Home');
-	const dispatch = useDispatch();
-	const loginTs = useSelector(state=>{
-		return state.userReducer.loginTs;
-	});
-
-	const nav = useNavigation();
+  const nav = useNavigation();
+  useLayoutEffect(()=>{
+    nav.setOptions({
+      header: ()=>(<CustomHeader backgroundColor={'white'} title='Home'></CustomHeader>)
+    })
+  }, []);
 
 	function login() {
 		console.log('登入');
-		// dispatch(loginAction());
-		nav.navigate('Info');
-	}
-
-	function loading() {
-		nav.navigate('LoadingView');
+    push('Info');
 	}
 
 	return (
 		<SafeAreaView>
 			<View style={{}}>
 				<Text>Home页面</Text>
-				<Text>登陆时间：{loginTs}</Text>
+				<Text>登陆时间：{''}</Text>
+        <Text>{LangUtil.t('hello world!!!')}</Text>
 				<Button title='登入' onPress={login}></Button>
-				<Button title='loading' onPress={loading}></Button>
 			</View>
 		</SafeAreaView>
 	);

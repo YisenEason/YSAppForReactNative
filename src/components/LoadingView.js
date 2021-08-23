@@ -1,17 +1,15 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet, Button } from 'react-native';
-import { navigationRef } from '../navigation/navigation';
+import React, { useEffect } from 'react';
+import { View, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { push } from '../navigation/RootNavigation';
 
 const LoadingView = (props) => {
-  console.log(props);
 
   useEffect(()=>{
-    console.log(navigationRef);
     setTimeout(() => {
-      // navigationRef.pop();
+      push('Home');
     }, 1000);
-  }, []);
+  }, [])
 
   return (
     <View style={styles.container}>
