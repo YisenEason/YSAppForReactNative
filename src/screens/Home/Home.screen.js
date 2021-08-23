@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useReducer } from 'react';
 import { Button, SafeAreaView, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -14,9 +15,16 @@ const Home = () => {
 		return state.userReducer.loginTs;
 	});
 
+	const nav = useNavigation();
+
 	function login() {
 		console.log('登入');
-		dispatch(loginAction());
+		// dispatch(loginAction());
+		nav.navigate('Info');
+	}
+
+	function loading() {
+		nav.navigate('LoadingView');
 	}
 
 	return (
@@ -25,6 +33,7 @@ const Home = () => {
 				<Text>Home页面</Text>
 				<Text>登陆时间：{loginTs}</Text>
 				<Button title='登入' onPress={login}></Button>
+				<Button title='loading' onPress={loading}></Button>
 			</View>
 		</SafeAreaView>
 	);
